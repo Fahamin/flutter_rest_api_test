@@ -1,7 +1,8 @@
 import 'dart:convert';
-import 'package:flutter_rest_api_test/Post.dart';
-import 'package:flutter_rest_api_test/API.dart';
+import 'file:///E:/test/flutter_rest_api_test/flutter_rest_api_test/lib/model/Post.dart';
 import 'package:flutter/material.dart';
+import 'CommentsPage.dart';
+import 'package:flutter_rest_api_test/api/API.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   build(context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'My Http App',
+      title: 'Post Data ',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -28,6 +29,7 @@ class _MyListScreenState extends State {
   var Posts = new List<Post>();
 
   _getPosts() {
+
     API.getUsers().then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
@@ -46,7 +48,7 @@ class _MyListScreenState extends State {
   }
 
   @override
-  build(context) {
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text("Post List"),
@@ -55,11 +57,18 @@ class _MyListScreenState extends State {
           itemCount: Posts.length,
           itemBuilder: (context, index) {
             return ListTile(
+              leading: Icon(Icons.ac_unit),
+              title: Text(Posts[index].title),
+              subtitle: Text(Posts[index].body),
 
-                title: Text(Posts[index].title)
-
+              onTap:() {
+                Route route = MaterialPageRoute(builder: (context) => ComentsPage());
+                Navigator.push(context, route);
+              },
             );
           },
         ));
   }
 }
+
+

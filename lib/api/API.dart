@@ -8,4 +8,9 @@ class API {
     var url = baseUrl + "/posts";
     return http.get(url);
   }
+
+  static Future getComments() {
+    var url = baseUrl + "/comments";
+    return http.get(url);
+  }
 }
