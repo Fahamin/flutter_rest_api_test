@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'file:///E:/test/flutter_rest_api_test/flutter_rest_api_test/lib/model/Post.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rest_api_test/view/NewsDetails.dart';
 import 'CommentsPage.dart';
 import 'package:flutter_rest_api_test/api/API.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyListScreen(),
+      home: NewsDetails(),
     );
   }
 }
