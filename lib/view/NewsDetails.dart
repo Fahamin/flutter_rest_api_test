@@ -4,13 +4,14 @@ import 'package:flutter_rest_api_test/api/NewsApi.dart';
 import 'package:flutter_rest_api_test/model/Articles.dart';
 import 'package:flutter_rest_api_test/api/API.dart';
 
+import 'file:///E:/test/flutter_rest_api_test/flutter_rest_api_test/lib/ui/NewsTile.dart';
+
 class NewsDetails extends StatefulWidget {
   @override
   _NewsDetailsState createState() => _NewsDetailsState();
 }
 
 class _NewsDetailsState extends State<NewsDetails> {
-
   var _commentList = new List<Articles>();
 
   _getAllComments() async {
@@ -43,21 +44,42 @@ class _NewsDetailsState extends State<NewsDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("News List"),
-        ),
-        body: ListView.builder(
-          itemCount: _commentList.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              leading: Icon(Icons.ac_unit),
-              title: Text(_commentList[index].title),
-              subtitle: Text(_commentList[index].author),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            );
-          },
-        ));
+      appBar: AppBar(
+        title: Text("News List"),
+      ),
+      body: Container(
+        margin: EdgeInsets.only(top: 16),
+        child: ListView.builder(
+            itemCount: _commentList.length,
+            shrinkWrap: true,
+            physics: ClampingScrollPhysics(),
+            itemBuilder: (context, index) {
+              return NewsTile(
+                imgUrl: _commentList[index].urlToImage ?? "",
+                title: _commentList[index].title ?? "",
+                desc: _commentList[index].description ?? "",
+                content: _commentList[index].content ?? "",
+                posturl: _commentList[index].url ?? "",
+              );
+            }),
+      ),
+    );
   }
 }
+
+
+
+/*
+ListView.builder(
+itemCount: _commentList.length,
+itemBuilder: (context, index) {
+return ListTile(
+leading: Icon(Icons.ac_unit),
+title: Text(_commentList[index].title),
+subtitle: Text(_commentList[index].author),
+onTap: () {
+Navigator.pop(context);
+},
+);
+},
+));*/
